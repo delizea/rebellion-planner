@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#111111" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Rebellion 2026 Planner</title>
+  <style>
+    :root { --bg:#0b0b0c; --card:#151518; --muted:#a7a7b0; --text:#f2f2f5; --accent:#6ee7ff; --line:#27272d; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--text); }
+    header { position: sticky; top:0; background: rgba(11,11,12,.92); backdrop-filter: blur(10px); border-bottom:1px solid var(--line); z-index:10; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 14px 14px 70px; }
+    .row { display:flex; gap:10px; align-items:center; flex-wrap: wrap; }
+    .title { font-weight: 800; letter-spacing: .2px; }
+    .pill { font-size: 12px; color: var(--muted); border:1px solid var(--line); padding:6px 10px; border-radius: 999px; }
+    .tabs { display:flex; gap:8px; overflow:auto; padding: 10px 14px 12px; }
+    .tab { border:1px solid var(--line); background: transparent; color: var(--text); padding:8px 12px; border-radius: 999px; white-space: nowrap; cursor:pointer; }
+    .tab.active { border-color: rgba(110,231,255,.45); box-shadow: 0 0 0 2px rgba(110,231,255,.12) inset; }
+    .card { background: var(--card); border:1px solid var(--line); border-radius: 16px; padding: 12px; }
+    input, textarea, select { width:100%; background:#0f0f12; border:1px solid var(--line); color:var(--text); border-radius: 12px; padding: 10px 12px; }
+    textarea { min-height: 70px; resize: vertical; }
+    .grid { display:grid; gap:10px; grid-template-columns: 1fr; }
+    @media (min-width: 860px){ .grid { grid-template-columns: 1.3fr .7fr; } }
+    .list { display:flex; flex-direction: column; gap:8px; }
+    .item { display:flex; gap:10px; align-items:flex-start; padding: 10px; border:1px solid var(--line); border-radius: 14px; background: rgba(255,255,255,.02); }
+    .item h3 { margin:0; font-size: 14px; }
+    .item .meta { margin-top:2px; color: var(--muted); font-size: 12px; }
+    .btn { border:1px solid var(--line); background: transparent; color: var(--text); padding: 10px 12px; border-radius: 12px; cursor:pointer; }
+    .btn.primary { border-color: rgba(110,231,255,.45); box-shadow: 0 0 0 2px rgba(110,231,255,.12) inset; }
+    .btn.danger { border-color: rgba(255,99,99,.45); box-shadow: 0 0 0 2px rgba(255,99,99,.10) inset; }
+    .small { font-size: 12px; color: var(--muted); }
+    .footerbar { position: fixed; bottom:0; left:0; right:0; background: rgba(11,11,12,.92); backdrop-filter: blur(10px); border-top:1px solid var(--line); }
+    .footerbar .wrap { padding: 10px 14px; }
+    .two { display:grid; grid-template-columns: 1fr 1fr; gap:10px; }
+    .tag { font-size: 11px; padding: 3px 8px; border-radius: 999px; border:1px solid var(--line); color: var(--muted); }
+    .tag.must { border-color: rgba(110,231,255,.45); color: var(--accent); }
+    a { color: var(--accent); }
+    .hide { display:none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="row" style="justify-content: space-between;">
+        <div class="row">
+          <div class="title">Rebellion 2026 Planner</div>
+          <div class="pill" id="subtitle">Line-up by day (times TBD)</div>
+        </div>
+        <div class="row">
+          <button class="btn" id="btnPlan">My Plan</button>
+          <button class="btn" id="btnBrowse">Browse</button>
+        </div>
+      </div>
+    </div>
+    <div class="tabs" id="tabs"></div>
+  </header>
+
+  <main class="wrap">
+    <div class="grid">
+      <section class="card" id="left"></section>
+      <aside class="card" id="right"></aside>
+    </div>
+  </main>
+
+  <div class="footerbar">
+    <div class="wrap">
+      <div class="row" style="justify-content: space-between;">
+        <div class="small" id="status"></div>
+        <div class="row" style="gap:8px;">
+          <button class="btn" id="btnExport">Export</button>
+          <button class="btn" id="btnImport">Import</button>
+          <button class="btn danger" id="btnReset">Reset</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    }
+  </script>
+</body>
+</html>

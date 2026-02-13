@@ -1,0 +1,9 @@
+{
+  "name": "Rebellion 2026 Planner",
+  "short_name": "Rebellion",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b0b0c",
+  "theme_color": "#111111",
+  "icons": []
+}

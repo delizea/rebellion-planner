@@ -1,6 +1,6 @@
 // sw.js
 
-const CACHE_NAME = "rebellion-2026-v2";
+const CACHE_NAME = "rebellion-2026-v4";
 
 const ASSETS = [
   "./",
@@ -38,3 +38,4 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
